@@ -22,8 +22,13 @@ router.route('/treasure')
 	.post((req, res) => {
 		//console.log('mdr', treasure);
 		let treasure = new Treasure(req);
-		treasure.buildMap().then((res, err) => {
-			console.log(res);
+		treasure.buildMap().then((result, error) => {
+			if(result.status == 'success'){
+				res.send(result);
+			}
+			else{
+				res.send(error);
+			}
 		})
 	})
 

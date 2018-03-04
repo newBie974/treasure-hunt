@@ -4,7 +4,7 @@ app.directive('importFile', ['$http', '$location', ($http, $location) => {
 	return {
 		template: 	`<div class="row">
 					    <input name="myFile" type="file">
-					    <a class="waves-effect waves-light btn" ng-click="startGame()"><i class="material-icons right">cloud</i>button</a>
+					    <a class="waves-effect waves-light btn" ng-click="startGame()"><i class="material-icons right">send</i>button</a>
 				  	</div>`,
 		link: (scope, element, attr) => {
 			var reader 		= new FileReader();
@@ -62,6 +62,17 @@ app.directive('importFile', ['$http', '$location', ($http, $location) => {
 				if(Object.keys(data.map).length == 1 && Object.keys(data.player).length == 1){
 					$http.post(`${$location.$$absUrl}api/treasure`, {data:data}).then((res) => {
 						console.log(res);
+						if(res.data.data.status == 'success'){
+							if(res.data.data.erreur_mapping.length > 0){
+								console.log('jai une erreur');
+							}
+							else{
+								console.log('jai pas derreur la carte a bien été créée');
+							}
+						}
+						else{
+							console.log('probleme');
+						}
 					})
 				}
 				else{
