@@ -67,7 +67,7 @@ router.route('/treasure')
 
 
 app.use('/api', router);
-app.use(express.static(`${__dirname}/node_modules`));
+app.use('/public', express.static(`${__dirname}/node_modules`));
 app.use('/assets', express.static(`${__dirname}/assets`));
 /*Lunch server*/
 app.listen(port, () => {
