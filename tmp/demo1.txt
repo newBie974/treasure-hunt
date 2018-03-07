@@ -2,8 +2,8 @@
 C - 3 - 4
 #Je suis la mountain
 #Encore la mountain
+M - 1 - 0
 M - 1 - 1
-M - 2 - 2
 T - 0 - 3 - 2
-T - 1 - 3 - 2
-A - Lara - 1 - 2 - S - AADADAGGA
+T - 1 - 3 - 3
+A - Lara - 1 - 2 - S - GAGAAGAAGAAAGAAGAGAAGAAGAGADA

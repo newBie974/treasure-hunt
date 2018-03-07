@@ -1,10 +1,18 @@
 var app = angular.module('app', []);
 
+/*Directive to import file for our game*/
 app.directive('importFile', ['$http', '$location', ($http, $location) => {
 	return {
-		template: 	`<div class="row">
+		template: 	`<div class="row center-align">
+						<a id="demo" class="waves-effect waves-light btn red accent-4" href="/demo" ng-click="demoDownload()"><i class="material-icons right">code</i>demo file</a>
+						<br>
+						<br>
 					    <input name="myFile" type="file">
-					    <a class="waves-effect waves-light btn" ng-click="startGame()"><i class="material-icons right">send</i>button</a>
+					    <br>
+					    <br>
+					    <a class="waves-effect waves-light btn" ng-click="startGame()"><i class="material-icons right">send</i>start the game</a>
+					    <br>
+					    <a class="waves-effect waves-light btn red accent-4" href="/download" ng-show="dowloadPath"><i class="material-icons right">file_download</i>download result</a>
 				  	</div>`,
 		link: (scope, element, attr) => {
 			var reader 		= new FileReader();
@@ -61,13 +69,12 @@ app.directive('importFile', ['$http', '$location', ($http, $location) => {
 			scope.startGame = () => {
 				if(Object.keys(data.map).length == 1 && Object.keys(data.player).length == 1){
 					$http.post(`${$location.$$absUrl}api/treasure`, {data:data}).then((res) => {
-						console.log(res);
-						if(res.data.data.status == 'success'){
-							if(res.data.data.erreur_mapping.length > 0){
-								console.log('jai une erreur');
+						if(res.data.status == 'success'){
+							if(res.data.downloadPath){
+								scope.dowloadPath = res.data.downloadPath;
 							}
 							else{
-								console.log('jai pas derreur la carte a bien été créée');
+								console.log('jai pas généré le fichier');
 							}
 						}
 						else{
@@ -78,6 +85,11 @@ app.directive('importFile', ['$http', '$location', ($http, $location) => {
 				else{
 					console.log('Votre fichier doit comporter 1 seule map / 1 seul joueur');
 				}
+			}
+
+			scope.demoDownload = () => {
+				let demoBtn = angular.element(document.querySelector('#demo'));
+				demoBtn.removeClass('red accent-4').addClass('grey darken-1');
 			}
 		}
 	}
