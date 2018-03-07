@@ -70,7 +70,7 @@ app.use('/api', router);
 
 /*Lunch server*/
 app.listen(port, () => {
-	app.use('/node_modules', express.static(`${__dirname}/node_modules`));
-	app.use('/assets', express.static(`${__dirname}/assets`));
 	console.log(`Server is running ${port}`);
 });
+app.use('/node_modules', express.static(`${__dirname}/node_modules`));
+app.use('/assets', express.static(`${__dirname}/assets`));
