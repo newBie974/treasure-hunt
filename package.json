@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "author": "",
+  "author": "Aymeric DIJOUX",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
