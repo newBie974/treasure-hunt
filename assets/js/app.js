@@ -4,15 +4,18 @@ var app = angular.module('app', []);
 app.directive('importFile', ['$http', '$location', ($http, $location) => {
 	return {
 		template: 	`<div class="row center-align">
+						<div class="col-s12" style="margin-top:5%;">
 						<a id="demo" class="waves-effect waves-light btn red accent-4" href="/demo" ng-click="demoDownload()"><i class="material-icons right">code</i>demo file</a>
-						<br>
-						<br>
+						</div>
+						<div class="col-s12" style="margin-top:5%;">
 					    <input name="myFile" type="file">
-					    <br>
-					    <br>
+					    </div>
+					    <div class="col-s12" style="margin-top:5%;">
 					    <a class="waves-effect waves-light btn" ng-click="startGame()"><i class="material-icons right">send</i>start the game</a>
-					    <br>
+					    </div>
+					    <div class="col-s12">
 					    <a class="waves-effect waves-light btn red accent-4" href="/download" ng-show="dowloadPath"><i class="material-icons right">file_download</i>download result</a>
+					    </div>
 				  	</div>`,
 		link: (scope, element, attr) => {
 			var reader 		= new FileReader();
@@ -53,11 +56,11 @@ app.directive('importFile', ['$http', '$location', ($http, $location) => {
 						}
 					}
 					else if(e.startsWith('#')){
-						console.log('cest un commentaire', e);
+						//console.log('cest un commentaire', e);
 					}
 					else
 					{
-						console.log('nothing to do here');
+						//console.log('nothing to do here');
 					}
 				})
 			}
@@ -74,16 +77,16 @@ app.directive('importFile', ['$http', '$location', ($http, $location) => {
 								scope.dowloadPath = res.data.downloadPath;
 							}
 							else{
-								console.log('jai pas généré le fichier');
+								swal('erreur');
 							}
 						}
 						else{
-							console.log('probleme');
+							swal('probleme');
 						}
 					})
 				}
 				else{
-					console.log('Votre fichier doit comporter 1 seule map / 1 seul joueur');
+					swal('Votre fichier doit comporter 1 seule map / 1 seul joueur');
 				}
 			}
 
